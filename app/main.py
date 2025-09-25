@@ -27,7 +27,11 @@ def add_user(user: User):
 def get_user_id(user_id: int, user: User):
     for u in users:
         if u.user_id == user_id:
-            u = user
+            u.name = user.name
+            u.email = user.email
+            u.user_id = user.user_id
+            u.student_id = user.student_id
+            u.age = user.age
             return user
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
 
