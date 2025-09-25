@@ -23,3 +23,10 @@ def add_user(user: User):
     users.append(user)
     return user
 
+@app.put("/api/users/edit/{user_id}", status_code=status.HTTP_200_OK)
+def get_user_id(user_id: int, user: User):
+    for u in users:
+        if u.user_id == user_id:
+            u = user
+            return user
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
