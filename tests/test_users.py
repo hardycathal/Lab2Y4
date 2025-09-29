@@ -40,3 +40,8 @@ def test_put(client):
     assert r1.status_code == 200
     r1 = client.put("/api/users/123", json=user_payload())
     assert r1.status_code == 404
+
+@pytest.mark.parametrize("bad_age", [1, 2, 3, 4])
+def test_bad_age_422(client, bad_age):
+    r = client.post("/api/users", json=user_payload(uid=3, sid=bad_age))
+    assert r.status_code == 422 # pydantic validation error
